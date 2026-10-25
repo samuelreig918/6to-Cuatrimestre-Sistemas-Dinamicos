@@ -1,0 +1,59 @@
+clear all;
+clc;
+
+load experimentosOrd2.mat
+figure;
+plot(T,Y1);
+hold on;
+
+s = tf('s');
+Mp = (1.35 - 1)/1
+
+xi = -log(Mp) / sqrt(pi^2 + log(Mp)^2)
+tp = 0.8;
+wn = pi / (tp * sqrt(1 - xi^2))
+
+te = 3 / (xi * wn)
+
+K = 1 / 1;
+
+G=K*wn^2/(s^2+2*xi*wn*s+wn^2)
+hold on
+[y,t]=step(G);
+plot(t, y);
+
+load experimentosOrd2.mat
+figure;
+plot(T,Y2);
+s2 = tf('s');
+Mp2 = (1.1 - 1)/1
+
+xi2 = -log(Mp2) / sqrt(pi^2 + log(Mp2)^2)
+tp2 = 0.5;
+wn2 = pi / (tp2 * sqrt(1 - xi2^2))
+
+te2 = 3 / (xi2 * wn2)
+
+K2 = 1 / 1;
+
+G2=K2*wn2^2/(s2^2+2*xi2*wn2*s2+wn2^2)
+hold on
+[y2,t2]=step(G2);
+plot(t2, y2);
+
+figure;
+plot(T, Y2);
+s3 = tf('s');
+Mp3 = (4.666 - 3) / 3;
+xi3 = -log(Mp3) / sqrt(pi^2 + log(Mp3)^2);
+tp3 = 0.46;
+Periodo3 = 1.15;
+wn3 = 2 * pi / (Periodo3 * sqrt(1 - xi3^2))
+wn3 = 6.1
+te3 = 3 / (xi3 * wn3);
+K3 = 3 / 1;
+G3 = K3 * wn3^2 / (s3^2 + 2 * xi3 * wn3 * s3 + wn3^2);
+
+hold on;
+[y3, t3] = step(G3);
+plot(t3, y3);
